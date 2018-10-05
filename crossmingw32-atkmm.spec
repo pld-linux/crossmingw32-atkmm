@@ -2,7 +2,7 @@ Summary:	A C++ interface for atk library - cross MinGW32 version
 Summary(pl.UTF-8):	Interfejs C++ dla biblioteki atk - wersja skrośna MinGW32
 Name:		crossmingw32-atkmm
 Version:	2.24.2
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/atkmm/2.24/atkmm-%{version}.tar.xz
@@ -94,6 +94,8 @@ export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig:%{_npkgconfigdir}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+# std-threads required by glibmm requires at least WinXP API
+CPPFLAGS="%{rpmcppflags} -DWINVER=0x0501"
 %configure \
 	--target=%{target} \
 	--host=%{target} \
