@@ -1,25 +1,26 @@
 Summary:	A C++ interface for atk library - cross MinGW32 version
 Summary(pl.UTF-8):	Interfejs C++ dla biblioteki atk - wersja skrośna MinGW32
 Name:		crossmingw32-atkmm
-Version:	2.24.2
-Release:	3
+Version:	2.28.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/atkmm/2.24/atkmm-%{version}.tar.xz
-# Source0-md5:	d53b60b0f1be597e86070954a49cf0c3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/atkmm/2.28/atkmm-%{version}.tar.xz
+# Source0-md5:	6194ac577f15567adfa3c923944c6651
 URL:		http://www.gtkmm.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	crossmingw32-atk >= 2.18.0
-BuildRequires:	crossmingw32-gcc-c++
-BuildRequires:	crossmingw32-glibmm >= 2.46.1
+BuildRequires:	crossmingw32-gcc-c++ >= 1:4.7
+BuildRequires:	crossmingw32-glibmm >= 2.46.2
 BuildRequires:	libtool >= 2:2.0
-BuildRequires:	mm-common >= 0.9.8
+BuildRequires:	mm-common >= 0.9.10
 BuildRequires:	pkgconfig >= 1:0.15
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	crossmingw32-atk >= 2.18.0
-Requires:	crossmingw32-glibmm >= 2.46.1
+Requires:	crossmingw32-gcc-c++ >= 1:4.7
+Requires:	crossmingw32-glibmm >= 2.46.2
 Provides:	crossmingw32-gtkmm-atk
 Obsoletes:	crossmingw32-gtkmm-atk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,7 +74,7 @@ Summary:	DLL atkmm library for Windows
 Summary(pl.UTF-8):	Biblioteka DLL atkmm dla Windows
 Group:		Applications/Emulators
 Requires:	crossmingw32-atk-dll >= 2.18.0
-Requires:	crossmingw32-glibmm-dll >= 2.46.1
+Requires:	crossmingw32-glibmm-dll >= 2.46.2
 Requires:	wine
 Provides:	crossmingw32-gtkmm-atk-dll
 Obsoletes:	crossmingw32-gtkmm-atk-dll
@@ -100,6 +101,7 @@ CPPFLAGS="%{rpmcppflags} -DWINVER=0x0501"
 	--target=%{target} \
 	--host=%{target} \
 	--disable-documentation \
+	--disable-silent-rules \
 	--enable-static
 
 %{__make}
