@@ -138,4 +138,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files dll
 %defattr(644,root,root,755)
-%{_dlldir}/libatkmm-1.6-*.dll
+%{_dlldir}/libatkmm-1.6-1.dll
