@@ -1,18 +1,20 @@
 Summary:	A C++ interface for atk library - cross MinGW32 version
 Summary(pl.UTF-8):	Interfejs C++ dla biblioteki atk - wersja skrośna MinGW32
 Name:		crossmingw32-atkmm
-Version:	2.28.0
-Release:	3
+Version:	2.28.1
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/atkmm/2.28/atkmm-%{version}.tar.xz
-# Source0-md5:	6194ac577f15567adfa3c923944c6651
-URL:		http://www.gtkmm.org/
+Source0:	https://download.gnome.org/sources/atkmm/2.28/atkmm-%{version}.tar.xz
+# Source0-md5:	03d9d02736645083cbb824c926750624
+URL:		https://www.gtkmm.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	crossmingw32-atk >= 2.18.0
 BuildRequires:	crossmingw32-gcc-c++ >= 1:4.7
 BuildRequires:	crossmingw32-glibmm >= 2.46.2
+# for gmmproc tools
+BuildRequires:	glibmm-devel >= 2.46.2
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	mm-common >= 0.9.10
 BuildRequires:	pkgconfig >= 1:0.15
@@ -89,7 +91,10 @@ Biblioteka DLL atkmm dla Windows.
 %setup -q -n atkmm-%{version}
 
 %build
+# use host gmmprocdir (before changing PKG_CONFIG_LIBDIR to cross target)
+GMMPROC_DIR=$(pkg-config --variable=gmmprocdir glibmm-2.4)
 export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig:%{_npkgconfigdir}
+mm-common-prepare --copy --force
 %{__libtoolize}
 %{__aclocal} -I build
 %{__autoconf}
@@ -101,10 +106,12 @@ CPPFLAGS="%{rpmcppflags} -DWINVER=0x0501"
 	--target=%{target} \
 	--host=%{target} \
 	--disable-documentation \
+	--enable-maintainer-mode \
 	--disable-silent-rules \
 	--enable-static
 
-%{__make}
+%{__make} \
+	GMMPROC_DIR="$GMMPROC_DIR"
 
 %install
 rm -rf $RPM_BUILD_ROOT
