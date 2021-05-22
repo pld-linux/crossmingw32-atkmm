@@ -24,7 +24,7 @@ Requires:	crossmingw32-atk >= 2.18.0
 Requires:	crossmingw32-gcc-c++ >= 1:4.7
 Requires:	crossmingw32-glibmm >= 2.46.2
 Provides:	crossmingw32-gtkmm-atk
-Obsoletes:	crossmingw32-gtkmm-atk
+Obsoletes:	crossmingw32-gtkmm-atk < 2.22.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		no_install_post_strip	1
@@ -64,7 +64,7 @@ Summary(pl.UTF-8):	Statyczna biblioteka atkmm (wersja skrośna MinGW32)
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	crossmingw32-gtkmm-atk-static
-Obsoletes:	crossmingw32-gtkmm-atk-static
+Obsoletes:	crossmingw32-gtkmm-atk-static < 2.22.0
 
 %description static
 Static atkmm library (cross MinGW32 version).
@@ -80,7 +80,7 @@ Requires:	crossmingw32-atk-dll >= 2.18.0
 Requires:	crossmingw32-glibmm-dll >= 2.46.2
 Requires:	wine
 Provides:	crossmingw32-gtkmm-atk-dll
-Obsoletes:	crossmingw32-gtkmm-atk-dll
+Obsoletes:	crossmingw32-gtkmm-atk-dll < 2.22.0
 
 %description dll
 DLL atkmm library for Windows.
