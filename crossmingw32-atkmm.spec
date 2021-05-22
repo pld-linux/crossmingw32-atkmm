@@ -2,7 +2,7 @@ Summary:	A C++ interface for atk library - cross MinGW32 version
 Summary(pl.UTF-8):	Interfejs C++ dla biblioteki atk - wersja skrośna MinGW32
 Name:		crossmingw32-atkmm
 Version:	2.28.2
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Development/Libraries
 Source0:	https://download.gnome.org/sources/atkmm/2.28/atkmm-%{version}.tar.xz
@@ -93,8 +93,9 @@ Biblioteka DLL atkmm dla Windows.
 
 %build
 # use host gmmprocdir (before changing PKG_CONFIG_LIBDIR to cross target)
-GMMPROC_DIR=$(pkg-config --variable=gmmprocdir glibmm-2.4)
-export PKG_CONFIG_LIBDIR=%{_prefix}/lib/pkgconfig:%{_npkgconfigdir}
+# note: rpm.org sets PKG_CONFIG_PATH according to _libdir and _datadir
+GMMPROC_DIR=$(PKG_CONFIG_PATH=%{_sysprefix}/%{_lib}/pkgconfig pkg-config --variable=gmmprocdir glibmm-2.4)
+export PKG_CONFIG_PATH=%{_prefix}/lib/pkgconfig:%{_npkgconfigdir}
 mm-common-prepare --copy --force
 %{__libtoolize}
 %{__aclocal} -I build
